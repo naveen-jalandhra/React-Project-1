@@ -65,10 +65,14 @@ export function From({ setToggle, setSubmissions, NumData, setNumData }) {
       {/* Glass Card */}
       <div className="relative z-10 w-full max-w-md backdrop-blur-2xl bg-white/10 border border-white/20 p-8 rounded-3xl shadow-2xl shadow-purple-950/50">
         <h2 className="text-3xl font-bold text-white mb-2 text-center tracking-wide">
-          Get in Touch
+          {NumData !== null && NumData !== undefined
+            ? "Update Card"
+            : "Get in Touch"}
         </h2>
         <p className="text-purple-200/70 text-sm text-center mb-8">
-          Drop us a message and upload your image below.
+          {NumData !== null && NumData !== undefined
+            ? "Modify details below"
+            : "Drop us a message and upload your image below."}
         </p>
 
         <form
@@ -134,11 +138,15 @@ export function From({ setToggle, setSubmissions, NumData, setNumData }) {
             type="submit"
             className="w-full bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white font-semibold py-3.5 px-4 rounded-2xl shadow-lg shadow-purple-500/30 transition-all duration-300 transform active:scale-95 cursor-pointer text-sm tracking-wide"
           >
-            Send Message
+            {NumData !== null && NumData !== undefined
+              ? "Save Changes"
+              : "Send Message"}
           </button>
+
           <span
-            className="text-white underline"
+            className="text-white underline cursor-pointer inline-block mt-3"
             onClick={() => {
+              if (setNumData) setNumData(null);
               setToggle((condition) => !condition);
             }}
           >
