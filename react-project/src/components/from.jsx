@@ -1,25 +1,30 @@
-import { useState, useEffect } from "react";
-import React, { useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+import React from "react";
 
-export function From({ setToggle, setSubmissions, NumData, ReUpdateData }) {
+export function From({ setToggle, setSubmissions, NumData, setNumData }) {
   const NameRef = useRef(null);
   const EmailRef = useRef(null);
   const MessageRef = useRef(null);
   const ImageRef = useRef(null);
 
   useEffect(() => {
-    if (NumData !== null) {
-      NameRef.current.value = ReUpdateData.name;
-      EmailRef.current.value = ReUpdateData.email;
-      MessageRef.current.value = ReUpdateData.message;
-      //   ImageRef.current.value = NumData.FileData;
+    if (NumData !== null && NumData !== undefined && NumData.card) {
+      if (NameRef.current) NameRef.current.value = NumData.card.name || "";
+      if (EmailRef.current) EmailRef.current.value = NumData.card.email || "";
+      if (MessageRef.current)
+        MessageRef.current.value = NumData.card.message || "";
     }
-  }, [ReUpdateData]);
+  }, [NumData]);
 
   function FormFnc(e) {
     e.preventDefault();
-    let Data = ImageRef.current.files[0];
-    let FileData = Data ? URL.createObjectURL(Data) : "";
+
+    let Data = ImageRef.current?.files?.[0];
+    let FileData = Data
+      ? URL.createObjectURL(Data)
+      : NumData && NumData.card
+        ? NumData.card.image
+        : "";
 
     let FormData = {
       name: NameRef.current.value,
@@ -28,26 +33,27 @@ export function From({ setToggle, setSubmissions, NumData, ReUpdateData }) {
       image: FileData,
     };
 
-    // setSubmissions(() => {
     let OldData = JSON.parse(localStorage.getItem("users")) || [];
-
     let UpdatedData = [...OldData];
 
-    if (NumData !== null) {
-      UpdatedData[ReUpdateData[NumData]] = FormData;
+    if (
+      NumData !== null &&
+      NumData !== undefined &&
+      NumData.index !== undefined
+    ) {
+      UpdatedData[NumData.index] = FormData;
     } else {
       UpdatedData.push(FormData);
     }
 
     localStorage.setItem("users", JSON.stringify(UpdatedData));
     setSubmissions(UpdatedData);
-    //   return UpdatedData;
-    // });
+    if (setNumData) setNumData(null);
 
     NameRef.current.value = "";
     EmailRef.current.value = "";
     MessageRef.current.value = "";
-    ImageRef.current.value = "";
+    if (ImageRef.current) ImageRef.current.value = "";
   }
 
   return (
