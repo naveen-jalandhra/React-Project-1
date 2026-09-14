@@ -84,6 +84,7 @@ export function From({ setToggle, setSubmissions, NumData, setNumData }) {
             </label>
             <input
               type="text"
+              required
               ref={NameRef}
               placeholder="Aapka naam"
               className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-2xl text-white placeholder-purple-300/40 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 focus:bg-white/10 transition-all duration-300 shadow-inner"
@@ -96,6 +97,7 @@ export function From({ setToggle, setSubmissions, NumData, setNumData }) {
             </label>
             <input
               type="email"
+              required
               ref={EmailRef}
               placeholder="aapka@email.com"
               className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-2xl text-white placeholder-purple-300/40 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 focus:bg-white/10 transition-all duration-300 shadow-inner"
@@ -121,6 +123,7 @@ export function From({ setToggle, setSubmissions, NumData, setNumData }) {
             </label>
             <textarea
               rows="4"
+              required
               ref={MessageRef}
               placeholder="Yahan apna message likhein..."
               className="w-full px-4 py-3 bg-white/5 border border-white/15 rounded-2xl text-white placeholder-purple-300/40 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 focus:bg-white/10 transition-all duration-300 shadow-inner resize-none"
