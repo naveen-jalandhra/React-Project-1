@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./assets/Fonts/poppins-devanagari-400-normal.ttf") format(".ttf");
+}
+
+@font-face {
+  font-family: "inter";
+  src: url("./assets/Fonts/Inter_18pt-Medium.ttf") format(".ttf");
+}
+
+@theme {
+  --font-poppins: "Poppins", sans-serif;
+
+  --font-inter: "inter", sans-serif;
+}
